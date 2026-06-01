@@ -1,0 +1,161 @@
+\documentclass[twoside,11pt]{article}
+
+%================================ PREAMBLE ==================================
+
+%--------- Packages -----------
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{clrscode3e}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage{url}
+\usepackage{listings}
+\lstset{ basicstyle=\ttfamily, columns=fullflexible, frame=single, breaklines=true, postbreak=\mbox{\textcolor{red}{$\rightarrow$}\space} }
+
+%----------Spacing-------------
+\setlength{\topmargin}{-0.6 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+\setlength{\headheight}{13.6pt}
+
+\newcommand{\boxheader}[1]{
+    \pagestyle{myheadings}
+    \thispagestyle{plain}
+    \newpage
+    \setcounter{page}{1}
+    \noindent
+    \begin{center}
+        \framebox{
+            \vbox{
+                \vspace{2mm}
+                \hbox to 6.28in { {\bf CIS 5030 Online} \hfill {\bf Summer 2026} }
+                \vspace{2mm}
+                \hbox to 6.28in { \hfill {\Large Homework #1 } \hfill }
+                \vspace{2mm}
+                \hbox to 6.28in { Name: YOUR NAME; Collaborator: YOUR COLLABORATOR \hfill }
+                \vspace{2mm}
+            }
+        }
+    \end{center}
+}
+
+
+\newcommand{\sol}[1]{{\par{}\textit{Solution: } \par{} #1 \par{}}}
+
+%---------Commands-----------
+\renewcommand{\Pr}[1]{{\mathrm{Pr}\mathopen{}\left[ #1 \right]\mathclose{}}}
+\newcommand{\E}[1]{{\mathbf{E}\mathopen{}\left[ #1 \right]\mathclose{}}}
+\newcommand{\Var}[1]{{\mathrm{Var}\mathopen{}\left( #1 \right)\mathclose{}}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\allowdisplaybreaks
+
+\newcommand{\ind}{\boldsymbol{1}}
+
+\newcommand{\bm}{\boldsymbol{m}}
+\newcommand{\bT}{\boldsymbol{T}}
+\newcommand{\bW}{\boldsymbol{W}}
+\newcommand{\bX}{\boldsymbol{X}}
+\newcommand{\bY}{\boldsymbol{Y}}
+
+%=============================== END PREAMBLE ===============================
+
+%============================ BEGIN DOCUMENT ================================
+
+\begin{document}
+\boxheader{1}
+
+\noindent 
+{\bf Important:} For this homework and all subsequent homeworks, whenever you are asked to analyze a particular algorithm or to design an algorithm, your solution \underline{must include} a \textbf{clear English description} of your thought process. Remember, your audience is a human, not a computer, and we want to understand the process you used to arrive at the solution. This way, we can provide appropriate feedback.
+
+\begin{enumerate}
+\item
+    
+    Suppose that there are $n$ distinct types of baseball cards, and you may purchase a box which contains a baseball card whose type is drawn independently of other boxes and uniformly at random. That is, the card in the box is equally likely to be of any of the $n$ types. In this problem, you will compute the expected number of boxes you will need to buy in order to collect all $n$ card types.
+    
+    \begin{enumerate}
+    
+    	\item What is the probability that a box you buy contains a new type of card, given that you already have $k-1$ distinct types? (Here, we are looking for an expression of the probability which depends on the two parameters $n$ and $k$).
+    	
+        \[
+            \sum
+        \]
+	
+	\item What is the probability that it takes exactly $\ell$ boxes before you find a card type that you do not already have, given that you already have $k-1$ distinct card types? (Once more, we are looking for an expression of the probability which depends on $n$, $k$, and $\ell$).
+	
+	\item Let $\bX_{k}$ denote the random variable which encodes the number of additional boxes that you need to buy in order to obtain the $k$-th new type of card, given that you already have $k-1$ distinct types of cards. Use part (b) in order to express the expectation of $\bX_{k}$ as a function of $n$ and $k$? You may use the fact that for any $0 < \gamma < 1$, 
+	\[ \sum_{\ell=1}^{\infty} \ell \cdot \gamma^{\ell-1} = \frac{1}{(1 - \gamma)^{2}}.\]
+    
+   	\item Let $\bT$ denote the total number of boxes that you need to buy in order to collect all $n$ distinct card types. Express $\bT$ in terms of the random variables $\bX_k$, for potentially various values of $k$. 
+	
+	\item Compute $\E{\bT}$ using linearity of expectation, and express the final answer in terms of $n$ and the \emph{harmonic sum} $H_{n-1} = \sum_{j=1}^{n-1} 1/j$. In order to simplify the resulting expression, it is sometimes useful to consider a finite summation in the \emph{reverse} order, namely,
+	\[ \sum_{k=a}^{b} f_k = \sum_{k=b}^{a} f_k.\] 
+	
+    \end{enumerate}
+
+	
+\item There is a flour manufacturing facility where a machine is designed to fill bags with 500 grams of flour. However, the machine is not perfect, and there are slight variations in the filling process. Each time the machine fills a bag, the number of grams in the bag can be expressed by a random variable $\bW$ whose expectation $\E{\bW} = \mu$ is 500 and whose standard deviation $\sigma$ is $10$ (equivalently, the variance $\sigma^2 = \E{(\bW - \mu)^2}$ is $100$). Each time the machine fills a bag, the corresponding random variable is independent and identically distributed.
+    
+\begin{enumerate}
+	
+	\item Using Chebyshev's inequality, give an upper bound on the probability that a particular bag is filled with fewer than $475$ grams or more than $525$ grams. (We are expecting a solution which gives a specific number).
+		
+	\item Suppose the machine fills 100 bags of flour. Use the fact the number of grams per bag is independent and identically distributed, as well as Chebyshev's inequality, in order to upper bound the probability that the total number of grams in all $100$ bags is fewer than $49000$ or more than $51000$. Recall that the variance of a sum of independent random variables is the sum of the variances; namely, for $k$ draws $\bW_1,\dots, \bW_k$,
+	\begin{align*}
+	\E{\left( \sum_{\ell=1}^k (\bW_{\ell} - \mu) \right)^2} = \sum_{\ell=1}^{k} \E{(\bW_{\ell} - \mu)^2}.
+	\end{align*}
+
+\end{enumerate}    
+
+
+    
+
+\item
+
+Typically, professional sport competitions are used to identify the best player among a group. However, the International Tennis Federation (the international governing body of tennis, or ITF) wants to design a tournament---but not to identify the best---rather, the ITF wants to identify a \emph{median} player. Formally, if there are $n$ total players with an (unknown) ordering of skill among them, a median player has at least $n/2$ higher-skilled players and at least $n/2$ lower-skilled players.\footnote{Intuitively, this is the ``middle-rank'' player (in the case $n$ is odd, there is a unique such player, and if $n$ is even, there are two such players).}
+
+The problem is that organizing a tournament with every player is too expensive, and the ITF will organize a small tournament with the hopes of identifying an $\epsilon$-\emph{approximate median} player: a player where at least $(1-\epsilon)n/2$ players are higher-skilled and at least $(1-\epsilon) n/2$ are lower-skilled.
+
+\begin{enumerate}
+\item[(a)] The ITF will select an odd number $t$ between $1$ and $n$, and choose a uniformly random set of $t$ players to participate in the tournament ($t$ is odd so that there is a unique median player). Let $\bX_1,\dots, \bX_n$ denote $n$ indicator random variables which are set to $0$ or $1$, and 
+\[ \bX_i = \ind\left\{ \text{player $i$ participates in the tournament}\right\} \in \{0,1\}.\]
+Without loss of generality, player $1$ is the lowest-skill, followed by player 2, and so on until player $n$, who is the highest-skilled player---the indices are solely for the analysis, since the ITF does not know the ranking! For any range $a < b$, compute
+\begin{align*}
+\mu(a, b) = \E{\sum_{i=a}^b \bX_i},
+\end{align*}
+as a function of $n$, $t$, and $a,b$. 
+
+\item[(b)] Even though the random variables $\bX_1,\dots, \bX_n$ are \emph{not} independent, $\Var{\sum_{i=a}^b \bX_i}$ can be upper bounded by the corresponding independent version. Namely, suppose $\bX_1', \dots, \bX_n' \in \{0,1\}$ were independent and identically distributed random variables which are set to $1$ with probability $t/n$, then $\Var{\sum_{i=a}^b \bX_i} \leq \Var{\sum_{i=a}^b \bX_i'}$. Compute $\Var{ \sum_{i=a}^b \bX_i' }$ as a function of $n$, $t$, $a$ and $b$ in order to obtain an upper bound on $\Var{\sum_{i=a}^b \bX_i}$.
+
+\end{enumerate}
+Given parts (a) and (b), we are now equipped to analyze how the median player in the tournament can be used to deduce an $\epsilon$-approximate median player of the full tournament.
+\begin{enumerate}
+\item[(c)] Once the tournament on the selected player is run, the ITF learns the relative ranking of the $t$ participating players. Hence, the ITF selects the median player among those who participated in the tournament (in other words, the player so that at least $t/2$ were lower-skilled, and at least $t/2$ were higher-skilled). Let $\bm \in \{1,\dots, n\}$ be the random variable which selects the median player among those which participated in the tournament. Justify the following three expressions:
+\begin{itemize}
+\item $\bX_{\bm} = 1$.
+\item $\bX_1 + \bX_2 + \dots + \bX_{\bm} \geq t / 2$.
+\item $\bX_{\bm} + \bX_{\bm+2} + \dots + \bX_n \geq t / 2$.
+\end{itemize}
+
+\item[(d)] Let $\ell_0 = (1-\epsilon) n /2$ and $\ell_1 = (1+\epsilon) n/2$, and notice that the ITF will be incorrect in identifying an $\epsilon$-approximate median player whenever the selected player $\bm$ lies \emph{outside} the interval $(\ell_0, \ell_1)$---this is because the players in that interval are all of the $\epsilon$-approximate median players. Justify the following expression:
+\begin{align*}
+\Pr{\bm \notin (\ell_0, \ell_1)} \leq \Pr{ \sum_{i=1}^{\ell_0}  \bX_i > \frac{t}{2} } + \Pr{ \sum_{i=\ell_1}^{n} \bX_i > \frac{t}{2} }.
+\end{align*} 
+
+\item[(e)] Use Chebyshev's inequality (as well as the quantities computed in parts (a) and (b)) in order to upper bound the expressions
+\begin{align*}
+\Pr{\sum_{i=1}^{\ell_0} \bX_i > \frac{t}{2} } \qquad\text{and}\qquad \Pr{\sum_{i=\ell_1}^n \bX_i > \frac{t}{2}}
+\end{align*}
+as a function of $n, t$ and $\epsilon$. (Hint: you may find it useful to subtract the expectation from both sides of the inequality!)
+
+\item[(f)] Conclude that, by setting $t = O(1/\epsilon^2)$, the ITF will identify an $\epsilon$-approximate median with probability at least $0.9$.
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
